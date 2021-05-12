@@ -8,7 +8,7 @@ from key_bindings import show_bindings
 
 
 # All Functions Here...
-
+# More comments to be added soon.
 def new():
     # New File Function
     global file
@@ -212,42 +212,47 @@ def get_help():
         askokcancel("Information By Editor", info.read())
 
 
+# Shows all key_bindings from key_bindings module.
 def keybindings():
     show_bindings()
 
 
+# increases font size from menu.
 def increase_font():
     global size, font
     size += 2
     textarea['font'] = f"{font} {size}"
 
-
+# Decreases font size from menu.
 def decrease_font():
     global size, font
     size -= 2
     textarea['font'] = f"{font} {size}"
 
-
+# Increases font size with shortcut.
 def font_inc(event):
     global size, font
     size += 2
     textarea['font'] = f"{font} {size}"
 
-
+# Decreases font size with shortcut.
 def font_dec(event):
     global size, font
     size -= 2
     textarea['font'] = f"{font} {size}"
 
 
+# Function makes text bold in textarea.
 def bold(event):
     textarea['font'] += " bold"
 
 
+# Function makes text italic in textarea.
 def italic(event):
     textarea['font'] += " italic"
 
 
+# Function underlines text in textarea.
 def underline(event):
     textarea['font'] += " underline"
 
@@ -261,6 +266,7 @@ height = root.winfo_screenheight()
 width = root.winfo_screenwidth()
 root.geometry(f"{width}x{height}")
 root.title("Text Editor")
+
 
 # Tool bar or Menubar...
 menubar = Menu(root, bg="black")

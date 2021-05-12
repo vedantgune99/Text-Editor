@@ -28,7 +28,8 @@ def new_shortcut(event):
 def openfile():
     # Open File Function
     global file
-    file = askopenfilename(defaultextension=".txt", filetypes=[("All Files", "*.*"), ("Text Documents", "*.txt")])
+    file = askopenfilename(defaultextension=".txt", filetypes=[
+                           ("All Files", "*.*"), ("Text Documents", "*.txt")])
 
     if file == "":
         file = None
@@ -43,7 +44,8 @@ def openfile():
 def openfile_shortcut(event):
     # Open File Function
     global file
-    file = askopenfilename(defaultextension=".txt", filetypes=[("All Files", "*.*"), ("Text Documents", "*.txt")])
+    file = askopenfilename(defaultextension=".txt", filetypes=[
+                           ("All Files", "*.*"), ("Text Documents", "*.txt")])
 
     if file == "":
         file = None
@@ -189,7 +191,8 @@ def background():
 
 
 def cursor_color():
-    textarea['insertbackground'] = colorchooser.askcolor(title="Pick Cursor Color")[1]
+    textarea['insertbackground'] = colorchooser.askcolor(
+        title="Pick Cursor Color")[1]
 
 
 def sbar_color():
@@ -224,18 +227,24 @@ def increase_font():
     textarea['font'] = f"{font} {size}"
 
 # Decreases font size from menu.
+
+
 def decrease_font():
     global size, font
     size -= 2
     textarea['font'] = f"{font} {size}"
 
 # Increases font size with shortcut.
+
+
 def font_inc(event):
     global size, font
     size += 2
     textarea['font'] = f"{font} {size}"
 
 # Decreases font size with shortcut.
+
+
 def font_dec(event):
     global size, font
     size -= 2
@@ -265,6 +274,7 @@ file = None
 height = root.winfo_screenheight()
 width = root.winfo_screenwidth()
 root.geometry(f"{width}x{height}")
+root.iconbitmap('icon.ico')
 root.title("Text Editor")
 
 

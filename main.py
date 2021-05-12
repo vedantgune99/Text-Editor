@@ -4,14 +4,10 @@ from tkinter import colorchooser
 from tkinter.messagebox import askokcancel
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from pathlib import Path
+from key_bindings import show_bindings
 
 
 # All Functions Here...
-
-
-def do_nothing():
-    pass
-
 
 def new():
     # New File Function
@@ -21,7 +17,7 @@ def new():
     textarea.delete(1.0, END)
 
 
-def new_Shortcut(event):
+def new_shortcut(event):
     # New File Function
     global file
     file = None
@@ -44,7 +40,7 @@ def openfile():
             textarea.insert(1.0, f.read())
 
 
-def openfile_Shortcut(event):
+def openfile_shortcut(event):
     # Open File Function
     global file
     file = askopenfilename(defaultextension=".txt", filetypes=[("All Files", "*.*"), ("Text Documents", "*.txt")])
@@ -62,7 +58,7 @@ def openfile_Shortcut(event):
 def savefile():
     # File Save Function
     global file
-    if file == None:
+    if file is None:
         file = asksaveasfilename(defaultextension=".txt", initialfile="Untitled.txt",
                                  filetypes=[("All Files", "*.*"), ("Text Documents", "*.txt")])
 
@@ -79,10 +75,10 @@ def savefile():
             root.title(Path(file).name + "- Editor")
 
 
-def savefile_Shortcut(event):
+def savefile_shortcut(event):
     # File Save Function
     global file
-    if file == None:
+    if file is None:
         file = asksaveasfilename(defaultextension=".txt", initialfile="Untitled.txt",
                                  filetypes=[("All Files", "*.*"), ("Text Documents", "*.txt")])
 
@@ -97,6 +93,7 @@ def savefile_Shortcut(event):
         with open(file, 'w') as f:
             f.write(textarea.get(1.0, END))
             root.title(Path(file).name + "- Editor")
+
 
 def engaged(event):
     # textarea active status change function
@@ -116,7 +113,7 @@ def reset_win(event):
     root.attributes('-fullscreen', False)
 
 
-def darkTheme():
+def dark_theme():
     textarea['bg'] = 'black'
     textarea['fg'] = 'white'
     textarea['insertbackground'] = 'red'
@@ -124,22 +121,20 @@ def darkTheme():
     sbar['bg'] = 'light gray'
 
 
-def sunTheme():
+def sun_theme():
     textarea['bg'] = 'wheat'
     textarea['fg'] = 'brown'
     textarea['insertbackground'] = 'black'
     textarea['cursor'] = 'pirate'
-    font = "Helvetica"
     textarea['font'] = f'{font} {size} italic'
     sbar['bg'] = 'brown'
     sbar['fg'] = 'wheat'
 
 
-def lightTheme():
+def light_theme():
     textarea['bg'] = 'light gray'
     textarea['fg'] = 'black'
     textarea['insertbackground'] = 'cyan'
-    font = "Helvetica"
     textarea['font'] = f"{font} {size} bold"
     sbar['bg'] = "sky blue"
     sbar['fg'] = "white"
@@ -148,7 +143,6 @@ def lightTheme():
 def default():
     textarea['bg'] = 'white'
     textarea['fg'] = 'black'
-    font = "Helvetica"
     textarea['font'] = f'{font} {size}'
     textarea['insertbackground'] = 'black'
     textarea['cursor'] = 'arrow'
@@ -218,6 +212,10 @@ def get_help():
         askokcancel("Information By Editor", info.read())
 
 
+def keybindings():
+    show_bindings()
+
+
 def increase_font():
     global size, font
     size += 2
@@ -284,9 +282,9 @@ editmenu.add_command(label='Decrease Font Size ▼', command=decrease_font)
 menubar.add_cascade(label="Edit", menu=editmenu)
 
 colormenu = Menu(menubar, tearoff=False)
-colormenu.add_command(label='Sun Theme', command=sunTheme)
-colormenu.add_command(label='Dark Theme', command=darkTheme)
-colormenu.add_command(label='Light Theme', command=lightTheme)
+colormenu.add_command(label='Sun Theme', command=sun_theme)
+colormenu.add_command(label='Dark Theme', command=dark_theme)
+colormenu.add_command(label='Light Theme', command=light_theme)
 colormenu.add_separator()
 colormenu.add_command(label='Default Theme', command=default)
 menubar.add_cascade(label="Themes", menu=colormenu)
@@ -301,6 +299,7 @@ menubar.add_cascade(label="Custom Colors", menu=custommenu)
 
 helpmenu = Menu(menubar, tearoff=False)
 helpmenu.add_command(label='About Editor', command=about)
+helpmenu.add_command(label='Keyboard Shortcuts', command=keybindings)
 helpmenu.add_command(label='Help', command=get_help)
 menubar.add_cascade(label="More...", menu=helpmenu)
 
@@ -331,9 +330,9 @@ textarea.bind('<Down>', font_dec)
 textarea.bind('<Control-b>', bold)
 textarea.bind('<Control-i>', italic)
 textarea.bind('<Control-u>', underline)
-textarea.bind('<Control-o>', openfile_Shortcut)
-textarea.bind('<Control-n>', new_Shortcut)
-textarea.bind('<Control-s>', savefile_Shortcut)
+textarea.bind('<Control-o>', openfile_shortcut)
+textarea.bind('<Control-n>', new_shortcut)
+textarea.bind('<Control-s>', savefile_shortcut)
 
 # Root Configuration and Mainloop...
 root.config(menu=menubar)

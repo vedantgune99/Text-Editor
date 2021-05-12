@@ -1,4 +1,3 @@
 __pycache__/
-.idea/
-*.iml
-*.xml
+.idea/*.iml
+.idea/*.xml
